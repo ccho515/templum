@@ -1,29 +1,28 @@
 package com.qualityworkscg.pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 public class Page {
   
-  protected WebDriver driver;
+  private WebDriver driver = new ChromeDriver();
+
   
-  public Page(WebDriver driver) {
-    this.driver = driver;
+  @BeforeClass
+  public void beforeClass() {
+    System.setProperty("webdriver.chrome.driver", "C:\\Users\\ccho5\\Desktop\\chromedriver.exe");
+    driver = new ChromeDriver();
   }
 
-  public void navigate(String url) {
-    driver.navigate().to(url);
-  }
-  
-  public String getTitle() {
-    return driver.getTitle();
+  public WebDriver getDriver() {
+    return driver;
   }
 
-  public void tearDown() {
-    try {
-      this.driver.quit();
-    } catch(Exception e) {
-      e.printStackTrace();
-    }
+  @AfterClass
+  public void afterClass() {
+    driver.quit();
+
   }
-  
 }
